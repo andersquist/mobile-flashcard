@@ -12,6 +12,7 @@ import {
   Title,
   Spinner,
 } from 'native-base'
+import { Text as TTExt } from 'react-native'
 import {purple, white} from '../utils/colors'
 import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions'
@@ -56,12 +57,11 @@ class ListDecks extends Component {
               </ListItem>
             ))}
         </List>
+        <TTExt>{JSON.stringify(decks)}</TTExt>
       </Container>
     )
   }
 }
-
-
 
 function mapStateToProps(decks) {
   return {

@@ -11,7 +11,7 @@ const MainTabs = (props) => {
         <ListDecks navigation={props.navigation}/>
       </Tab>
       <Tab heading='Add Deck'>
-        <AddDeck/>
+        <AddDeck navigation={props.navigation}/>
       </Tab>
     </Tabs>
   )

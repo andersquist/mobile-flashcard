@@ -14,7 +14,7 @@ function decks (state = {}, action) {
       }
     case REMOVE_DECK :
       const decks = Object.keys(state)
-        .filter((key) => key === action.id)
+        .filter((key) => key === action.key)
         .map((key) => state[key])
       return {
         ...decks,
@@ -22,17 +22,17 @@ function decks (state = {}, action) {
     case ADD_QUESTION :
       return {
         ...state,
-        [action.id]: {
-          ...state[action.id],
-          questions: state[action.id].questions.concat(action.question)
+        [action.key]: {
+          ...state[action.key],
+          questions: state[action.key].questions.concat(action.question)
         }
       }
     case REMOVE_QUESTION :
       return {
         ...state,
-        [action.id]: {
-          ...state[action.id],
-          questions: state[action.id].questions
+        [action.key]: {
+          ...state[action.key],
+          questions: state[action.key].questions
             .filter((q) => q.id !== action.qid)
         }
       }

@@ -1,3 +1,5 @@
+import { formatQuestion } from './helpers'
+
 let decks = {
   React: {
     title: 'React',

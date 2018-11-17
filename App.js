@@ -6,10 +6,11 @@ import reducer from './reducers'
 import UdaciStatusBar from './components/UdaciStatusBar'
 import { purple, white } from './utils/colors'
 import { Font } from 'expo'
-import { Container } from 'native-base'
+import { Container, Spinner } from 'native-base'
 
 import DeckDetail from './components/DeckDetail'
 import MainTabs from './components/MainTabs'
+import { removeAll } from './utils/api'
 
 const store = createStore(reducer)
 
@@ -32,18 +33,24 @@ const MainNavigator = createStackNavigator({
 })
 
 export default class App extends React.Component {
+  state = {
+    ready: false,
+  }
   async componentWillMount() {
     await Font.loadAsync({
       'Roboto': require('native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
     })
+    this.setState(() => ({ ready: true }))
   }
   render() {
     return (
       <Provider store={store}>
         <Container>
           <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
-          <MainNavigator/>
+          { this.state.ready !== false
+            ? <MainNavigator/>
+            : <Spinner color={purple} />}
         </Container>
       </Provider>
     );
