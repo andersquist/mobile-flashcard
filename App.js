@@ -7,10 +7,10 @@ import UdaciStatusBar from './components/UdaciStatusBar'
 import { purple, white } from './utils/colors'
 import { Font } from 'expo'
 import { Container, Spinner } from 'native-base'
-
 import DeckDetail from './components/DeckDetail'
 import MainTabs from './components/MainTabs'
 import { removeAll } from './utils/api'
+import AddCard from './components/AddCard'
 
 const store = createStore(reducer)
 
@@ -23,6 +23,15 @@ const MainNavigator = createStackNavigator({
   },
   DeckDetail: {
     screen: DeckDetail,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    }),
+  },
+  AddCard: {
+    screen: AddCard,
     navigationOptions: ({ navigation }) => ({
       headerTintColor: white,
       headerStyle: {

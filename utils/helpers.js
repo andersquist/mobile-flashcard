@@ -9,9 +9,8 @@ export function formatDeck (title) {
   }
 }
 
-export function formatQuestion (question, answer) {
+export function formatCard (question, answer) {
   return {
-    id: generateUID(),
     question,
     answer,
   }

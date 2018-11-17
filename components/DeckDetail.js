@@ -19,7 +19,7 @@ class DeckDetail extends Component {
       title,
   }}
   render () {
-    const { deck } = this.props
+    const { deck, id } = this.props
     return (
       <Container>
         <Content padder>
@@ -30,7 +30,11 @@ class DeckDetail extends Component {
               <Text note>{deck.questions.length} card(s)</Text>
               <Button
                 block
-                style={{backgroundColor: purple, marginTop: 40}}>
+                style={{backgroundColor: purple, marginTop: 40}}
+                onPress={() => this.props.navigation.navigate('AddCard', {
+                  key: id,
+                })}
+                >
                 <Text>Add Card</Text>
               </Button>
               <Button
@@ -50,8 +54,9 @@ class DeckDetail extends Component {
 function mapStateToProps (decks, { navigation }) {
   const deck = decks[navigation.state.params.key]
   return {
-    key: navigation.state.params.key,
-    deck
+    id: navigation.state.params.key,
+    deck,
+    navigation,
   }
 }
 

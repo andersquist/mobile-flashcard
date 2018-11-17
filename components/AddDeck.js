@@ -24,7 +24,6 @@ class AddDeck extends Component {
 
     this.setState(() => ({ title: '' }))
 
-    alert('Deck was successfully added')
   }
   render() {
     const { title } = this.state
