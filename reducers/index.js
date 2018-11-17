@@ -1,4 +1,4 @@
-import { ADD_DECK, ADD_CARD, RECEIVE_DECKS, REMOVE_DECK, REMOVE_QUESTION } from '../actions'
+import { ADD_DECK, ADD_CARD, RECEIVE_DECKS, REMOVE_DECK } from '../actions'
 
 function decks (state = {}, action) {
   switch (action.type) {
@@ -13,11 +13,9 @@ function decks (state = {}, action) {
         ...action.deck,
       }
     case REMOVE_DECK :
-      const decks = Object.keys(state)
-        .filter((key) => key === action.key)
-        .map((key) => state[key])
+      const { [action.key]: value, ...rest } = state
       return {
-        ...decks,
+        ...rest,
       }
     case ADD_CARD :
       return {
@@ -25,15 +23,6 @@ function decks (state = {}, action) {
         [action.key]: {
           ...state[action.key],
           questions: state[action.key].questions.concat(action.card)
-        }
-      }
-    case REMOVE_QUESTION :
-      return {
-        ...state,
-        [action.key]: {
-          ...state[action.key],
-          questions: state[action.key].questions
-            .filter((q) => q.id !== action.qid)
         }
       }
       default :

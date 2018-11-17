@@ -12,7 +12,6 @@ import {
   Title,
   Spinner,
 } from 'native-base'
-import { Text as TTExt } from 'react-native'
 import {purple, white} from '../utils/colors'
 import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions'
@@ -41,7 +40,7 @@ class ListDecks extends Component {
         <List>
           <Header hasTabs iosBarStyle='light-content' style={{backgroundColor: purple}}>
             <Body>
-            <Title style={{color: white}}>Flash Cards</Title>
+            <Title style={{color: white}}>Decks</Title>
             </Body>
           </Header>
           {Object.keys(decks)
@@ -63,7 +62,6 @@ class ListDecks extends Component {
               </ListItem>
             ))}
         </List>
-        <TTExt>{JSON.stringify(decks)}</TTExt>
       </Container>
     )
   }
