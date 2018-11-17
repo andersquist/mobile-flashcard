@@ -10,7 +10,7 @@ import {
   Text,
   Icon,
   Title,
-  Spinner,
+  Spinner, Content,
 } from 'native-base'
 import {purple, white} from '../utils/colors'
 import { getDecks } from '../utils/api'
@@ -37,31 +37,43 @@ class ListDecks extends Component {
 
     return (
       <Container>
-        <List>
-          <Header hasTabs iosBarStyle='light-content' style={{backgroundColor: purple}}>
-            <Body>
-            <Title style={{color: white}}>Decks</Title>
-            </Body>
-          </Header>
-          {Object.keys(decks)
-            .map((key) => (
-              <ListItem
-                key={key}
-                button
-                onPress={() => this.props.navigation.navigate('DeckDetail', {
-                  key,
-                  deck: decks[key],
-                })} >
-                <Body>
-                <Text>{decks[key].title}</Text>
-                <Text note>{decks[key].questions.length} card(s)</Text>
-                </Body>
-                <Right>
-                  <Icon name='arrow-forward' />
-                </Right>
-              </ListItem>
-            ))}
-        </List>
+        {
+          Object.keys(decks).length === 0
+          ? (
+              <Content padder contentContainerStyle={{alignItems: 'center'}}>
+                <Text
+                  style={{marginTop: 40, fontSize: 25 }}
+                >There are no decks. Go ahead and add.</Text>
+              </Content>
+            )
+          : (
+              <List>
+                <Header hasTabs iosBarStyle='light-content' style={{backgroundColor: purple}}>
+                  <Body>
+                  <Title style={{color: white}}>Decks</Title>
+                  </Body>
+                </Header>
+                {Object.keys(decks)
+                  .map((key) => (
+                    <ListItem
+                      key={key}
+                      button
+                      onPress={() => this.props.navigation.navigate('DeckDetail', {
+                        key,
+                        deck: decks[key],
+                      })} >
+                      <Body>
+                      <Text>{decks[key].title}</Text>
+                      <Text note>{decks[key].questions.length} card(s)</Text>
+                      </Body>
+                      <Right>
+                        <Icon name='arrow-forward' />
+                      </Right>
+                    </ListItem>
+                  ))}
+              </List>
+          )
+        }
       </Container>
     )
   }

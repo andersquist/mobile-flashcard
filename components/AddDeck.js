@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { StackActions, NavigationActions } from 'react-navigation'
 import { Container, Header, Form, Content, Item, Input, Label, Body, Title, Button, Text } from 'native-base'
 import {purple, white} from '../utils/colors'
 import { addDeck } from '../actions'
@@ -24,10 +25,18 @@ class AddDeck extends Component {
 
     this.setState(() => ({ title: '' }))
 
-    navigation.navigate('DeckDetail', {
-      key,
-      deck,
-    })
+    // It's nicer to go back to home from DeckDetail
+    const resetAction = StackActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({ routeName: 'home' }),
+        NavigationActions.navigate({ routeName: 'DeckDetail', params: {
+          key,
+          deck,
+        }}),
+      ],
+    });
+    navigation.dispatch(resetAction)
   }
   render() {
     const { title } = this.state
