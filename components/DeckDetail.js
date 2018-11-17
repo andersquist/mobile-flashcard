@@ -10,7 +10,7 @@ import {
   CardItem,
   Text,
 } from 'native-base'
-import { gray, purple, white } from '../utils/colors'
+import { purple } from '../utils/colors'
 
 class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -39,7 +39,11 @@ class DeckDetail extends Component {
               </Button>
               <Button
                 block
-                style={{backgroundColor: purple, marginTop: 40}}>
+                style={{backgroundColor: purple, marginTop: 40}}
+                onPress={() => this.props.navigation.navigate('QuizView', {
+                  key: id,
+                })}
+              >
                 <Text>Start Quiz</Text>
               </Button>
               </Body>

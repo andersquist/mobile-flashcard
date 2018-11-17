@@ -9,8 +9,9 @@ import { Font } from 'expo'
 import { Container, Spinner } from 'native-base'
 import DeckDetail from './components/DeckDetail'
 import MainTabs from './components/MainTabs'
-import { removeAll } from './utils/api'
 import AddCard from './components/AddCard'
+import QuizView from './components/QuizView'
+import { removeAll } from './utils/api'
 
 const store = createStore(reducer)
 
@@ -32,6 +33,15 @@ const MainNavigator = createStackNavigator({
   },
   AddCard: {
     screen: AddCard,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    }),
+  },
+  QuizView: {
+    screen: QuizView,
     navigationOptions: ({ navigation }) => ({
       headerTintColor: white,
       headerStyle: {
