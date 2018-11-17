@@ -1,40 +1,58 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { connect } from 'react-redux'
 import {
   Container,
-  Header,
+  Content,
   Button,
   Body,
-  Right,
-  Icon,
-  Title,
-  Left,
+  H1,
+  Card,
+  CardItem,
+  Text,
 } from 'native-base'
-import { purple, white } from '../utils/colors'
+import { gray, purple, white } from '../utils/colors'
 
 class DeckDetail extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    header: (
-      <Header hasTabs iosBarStyle='light-content' style={{backgroundColor: purple}}>
-        <Left>
-          <Button transparent onPress={() => navigation.goBack()}>
-            <Icon name='arrow-back' />
-          </Button>
-        </Left>
-        <Body>
-          <Title style={{color: white}}>Deck Detail</Title>
-        </Body>
-        <Right />
-      </Header>
-    )
-  })
+  static navigationOptions = ({ navigation }) => {
+    const { title } = navigation.state.params.deck
+    return {
+      title,
+  }}
   render () {
+    const { deck } = this.props
     return (
-      <View>
-        <Text>DeckDetail</Text>
-      </View>
+      <Container>
+        <Content padder>
+          <Card>
+            <CardItem>
+              <Body>
+              <H1 style={{ marginTop: 20 }}>{deck.title}</H1>
+              <Text note>{deck.questions.length} card(s)</Text>
+              <Button
+                block
+                style={{backgroundColor: purple, marginTop: 40}}>
+                <Text>Add Card</Text>
+              </Button>
+              <Button
+                block
+                style={{backgroundColor: purple, marginTop: 40}}>
+                <Text>Start Quiz</Text>
+              </Button>
+              </Body>
+            </CardItem>
+          </Card>
+        </Content>
+      </Container>
     )
   }
 }
 
-export default DeckDetail
+function mapStateToProps (decks, { navigation }) {
+  const deck = decks[navigation.state.params.key]
+  return {
+    key: navigation.state.params.key,
+    deck
+  }
+}
+
+export default connect(mapStateToProps)(DeckDetail)

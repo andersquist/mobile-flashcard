@@ -46,7 +46,13 @@ class ListDecks extends Component {
           </Header>
           {Object.keys(decks)
             .map((key) => (
-              <ListItem key={key} button onPress={() => this.props.navigation.navigate('DeckDetail')} >
+              <ListItem
+                key={key}
+                button
+                onPress={() => this.props.navigation.navigate('DeckDetail', {
+                  key,
+                  deck: decks[key],
+                })} >
                 <Body>
                 <Text>{decks[key].title}</Text>
                 <Text note>{decks[key].questions.length} card(s)</Text>
