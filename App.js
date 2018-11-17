@@ -12,6 +12,7 @@ import MainTabs from './components/MainTabs'
 import AddCard from './components/AddCard'
 import QuizView from './components/QuizView'
 import { removeAll } from './utils/api'
+import { setLocalNotification } from './utils/helpers'
 
 const store = createStore(reducer)
 
@@ -61,6 +62,9 @@ export default class App extends React.Component {
       'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
     })
     this.setState(() => ({ ready: true }))
+  }
+  componentDidMount() {
+    setLocalNotification()
   }
   render() {
     return (

@@ -12,6 +12,7 @@ import {
   Left,
 } from 'native-base'
 import { purple } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 class QuizView extends Component {
   state = {
@@ -30,6 +31,12 @@ class QuizView extends Component {
       index: state.index + 1,
       showQuestion: true,
     }))
+
+    // The user completed at least one quiz
+    if (this.state.index + 1 === this.props.deck.questions.length) {
+      clearLocalNotification()
+        .then(setLocalNotification)
+    }
   }
   restart = () => {
     this.setState({
