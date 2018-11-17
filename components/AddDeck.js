@@ -11,7 +11,7 @@ class AddDeck extends Component {
     title: '',
   }
   addDeck = () => {
-    const { dispatch } = this.props
+    const { dispatch, navigation } = this.props
     const { title } = this.state
     const key = generateUID()
     const deck = formatDeck(title)
@@ -24,6 +24,10 @@ class AddDeck extends Component {
 
     this.setState(() => ({ title: '' }))
 
+    navigation.navigate('DeckDetail', {
+      key,
+      deck,
+    })
   }
   render() {
     const { title } = this.state
